@@ -1,0 +1,53 @@
+import scipy.special as spys
+import scipy.misc as spym # コンビネーション用 
+
+import numpy as np
+import math 
+import matplotlib.pyplot as plt
+
+# z + zDash = 1.0に注意
+def func(m, lamb, Delay): 
+    coeffi = np.power(math.exp(1), (- lamb * Delay))
+    ret_sum = 0;
+    for i in range(m - 1):
+        tmp_log =  i * np.log(lamb * Delay) - math.lgamma(i + 1)
+        ret_sum += np.power(math.exp(1), tmp_log)
+    return  coeffi * ret_sum
+
+#### パラメータの設定 ####
+# 有効ブロックハッシュ(Ethereumが辿れる前のブロックハッシュ数)
+m = 255 
+# 255ブロック先まで作られてしまっていたらもうデータベース更新はない
+# 254ブロックまでだったら作成されてても255ブロック目で取り込まれる
+M = m - 1 
+# ハッシュレート[block/sec]
+lamb = 1 / 12 
+
+# データの作成
+# 遅延時間
+stride = 0.1
+start = stride
+end = 5000
+Delay = np.arange(start, end, stride)
+
+y = func(m, lamb, Delay)
+
+print(Delay)
+print(lamb)
+print(lamb * Delay)
+
+# グラフの描画
+
+plt.plot(Delay, y, label="TEST")
+
+plt.xlabel("x-axis")
+plt.ylabel("y-axis")
+
+plt.legend()
+
+plt.xlim(xmin=0)
+plt.xlim(xmax=end) # 10100)
+plt.ylim(ymin=0.0)
+plt.ylim(ymax=1.05)
+plt.show()
+

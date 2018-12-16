@@ -1,0 +1,31 @@
+[pythonでEthereumノードに接続する簡単な方法]
+非常に簡単にローカルネットに接続できる
+	from web3 import Web3, HTTPProvider
+	web3 = Web3(HTTPProvider('http://localhost:8545'))
+	blockNumber=web3.eth.blockNumber
+	print(blockNumber)
+
+http://qiita.com/umidachi/items/7e98d8490fdc81256949
+
+[Web3.pyの使い方についてAPI Dcoumentation]
+下記のように使い方などについて記述されている
+	web3.soliditySha3(['bool'], True)
+	"0x5fe7f977e71dba2ea1a68e21057beebb9be2ac30c6410aa38d4f3fbe41dcffd2"
+	>>> web3.soliditySha3(['uint8', 'uint8', 'uint8'], [97, 98, 99])
+	"0x4e03657aea45a94fc7d47ba826c8d667c0d1e6e33a64a036ec44f58fa12d6c45"
+	>>> web3.soliditySha3(['address'], ["0x49eddd3769c0712032808d86597b84ac5c2f5614"])
+	"0x2ff37b5607484cd4eecf6d13292e22bd6e5401eaffcc07e279583bc742c68882"
+
+http://web3py.readthedocs.io/en/latest/overview.html?highlight=soliditySha3
+
+[Mastering Ethereum]
+https://github.com/a-mitani/mastering-ethereum/blob/master/meteor_dapp/simple_monitor.md
+
+[JSON-RPCで直打ちする(Web3.pyにはバグがある模様)]
+curl -X POST http://localhost:8545/  --data '{"jsonrpc":"2.0","method":"web3_clientVersion","params":[],"id":1}'
+
+[pyenvを用いたpythonの環境作り]
+https://qiita.com/mogom625/items/b1b673f530a05ec6b423
+
+[signのやり方(web3.jsとコントラクト)]
+https://gist.github.com/bas-vk/d46d83da2b2b4721efb0907aecdb7ebd
